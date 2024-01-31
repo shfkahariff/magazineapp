@@ -32,46 +32,52 @@
 <!-- Thumbnails -->
 <div class="thumbnails">
 	<div>
-		<ul>
-			<li class="i">
-				<img src="buku MSM 2023/buku MSM 2023-01.png" width="76" height="100" class="page-1">
-				<span>1</span>
-			</li>
-			<li class="d">
-				<img src="buku MSM 2023/buku MSM 2023-02.png" width="76" height="100" class="page-2">
-				<img src="buku MSM 2023/buku MSM 2023-03.png" width="76" height="100" class="page-3">
-				<span>2-3</span>
-			</li>
-			<li class="d">
-				<img src="buku MSM 2023/buku MSM 2023-04.png" width="76" height="100" class="page-4">
-				<img src="buku MSM 2023/buku MSM 2023-05.png" width="76" height="100" class="page-5">
-				<span>4-5</span>
-			</li>
-			<li class="d">
-				<img src="buku MSM 2023/buku MSM 2023-06.png" width="76" height="100" class="page-6">
-				<img src="buku MSM 2023/buku MSM 2023-07.png" width="76" height="100" class="page-7">
-				<span>6-7</span>
-			</li>
-			<li class="d">
-				<img src="buku MSM 2023/buku MSM 2023-08.png" width="76" height="100" class="page-8">
-				<img src="buku MSM 2023/buku MSM 2023-09.png" width="76" height="100" class="page-9">
-				<span>8-9</span>
-			</li>
-			<li class="d">
-				<img src="buku MSM 2023/buku MSM 2023-010.png" width="76" height="100" class="page-10">
-				<img src="buku MSM 2023/buku MSM 2023-011.png" width="76" height="100" class="page-11">
-				<span>10-11</span>
-			</li>
-			<li class="i">
-				<img src="buku MSM 2023/buku MSM 2023-012.png" width="76" height="100" class="page-12">
-				<span>12</span>
-			</li>
-		<ul>
-	<div>	
+        <ul id="imageList"></ul>
+    </div>	
 </div>
 </div>
 
 <script type="text/javascript">
+// Function to pad numbers with leading zeros
+function padNumber(num, length) {
+        var str = String(num);
+        var padding = length - str.length;
+        if (padding > 0) {
+            str = '0'.repeat(padding) + str;
+        }
+        return str;
+    }
+
+    // Reference to the ul element
+    var imageList = document.getElementById('imageList');
+
+    // Loop to generate list items dynamically
+    for (var i = 1; i <= 106; i++) {
+        // Define the image source
+        var imageSrc = "buku MSM 2023/buku MSM 2023-" + padNumber(i, i < 10 ? 2 : (i < 100 ? 3 : 4)) + ".png";
+
+        // Create li element
+        var listItem = document.createElement('li');
+        listItem.className = (i % 2 === 0) ? 'd' : 'i';
+
+        // Create img element
+        var imgElement = document.createElement('img');
+        imgElement.src = imageSrc;
+        imgElement.width = 76;
+        imgElement.height = 100;
+        imgElement.className = 'page-' + i;
+
+        // Create span element for page number
+        var spanElement = document.createElement('span');
+        spanElement.textContent = i;
+
+        // Append img and span to li
+        listItem.appendChild(imgElement);
+        listItem.appendChild(spanElement);
+
+        // Append li to ul
+        imageList.appendChild(listItem);
+    }
 
 function loadApp() {
 
@@ -360,7 +366,7 @@ function loadApp() {
 	}
 
 
-	// Regions
+	// Add scroll effect for thumbnails
 
 
 	// Events for the next button
